@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "status": "ready",
+  "verification": "mock-only",
+  "releaseEligible": true,
+  "maintainer": "jannikco",
+  "license": "MIT",
+  "sourceRevision": "e17392d32e8c10c46128a388d7a60b3385fa360ca5ad1dbf87d4206e2396689d",
+  "evidence": [
+    "Source-backed provider setup metadata",
+    "Offline configuration and MCP protocol tests"
+  ],
+  "provenance": [
+    "https://api.brevo.com/v3/swagger_definition_v3.yml"
+  ],
+  "id": "brevo-mcp",
+  "kind": "mcp-setup",
+  "product": "pipmcp",
+  "title": "Brevo MCP setup and connection checker",
+  "description": "Generate Brevo MCP client configuration, inspect available tools and validate hosted endpoint access through PipMCP.",
+  "operationIds": [],
+  "appSlug": "brevo",
+  "appName": "Brevo",
+  "providerDocs": "https://api.brevo.com/v3/swagger_definition_v3.yml",
+  "providerWebsite": "https://www.brevo.com/",
+  "authentication": {
+    "type": "api_key_header",
+    "requiredCredentialFields": [
+      "api_key"
+    ],
+    "requiredHeaderNames": [],
+    "helpUrl": "https://developers.brevo.com/docs/api-key-authentication",
+    "tenantRequired": false,
+    "accountParameterNames": []
+  },
+  "attributionSlug": "github-brevo-mcp",
+  "factory": "leadadapter-pipmcp",
+  "generatorVersion": 1
+}
