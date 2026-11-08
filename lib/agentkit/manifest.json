@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "product": "pipmcp",
+  "credential": "PIPMCP_API_KEY",
+  "skills": [
+    {
+      "name": "pipmcp-brevo",
+      "description": "Connect AI agents to Brevo using one PipMCP API key and actual hosted tool discovery."
+    }
+  ],
+  "files": {
+    "skills/pipmcp-brevo/SKILL.md": "efd1fb0beb1bc3736ba904fa69cbf6c44ee82c5608d36ddad3194f5614d09b42"
+  }
+}
