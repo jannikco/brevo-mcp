@@ -5,20 +5,22 @@
   "releaseEligible": true,
   "maintainer": "jannikco",
   "license": "MIT",
-  "sourceRevision": "e17392d32e8c10c46128a388d7a60b3385fa360ca5ad1dbf87d4206e2396689d",
+  "sourceRevision": "a9d211b64a5e25f3515be094fd7adde62ab56c270ca88611c98e3235ec8ac5b5",
   "evidence": [
-    "Source-backed provider setup metadata",
-    "Offline configuration and MCP protocol tests"
+    "Actual tools/call and direct-provider request contract tests"
   ],
   "provenance": [
     "https://api.brevo.com/v3/swagger_definition_v3.yml"
   ],
   "id": "brevo-mcp",
-  "kind": "mcp-setup",
+  "kind": "provider-connector",
   "product": "pipmcp",
-  "title": "Brevo MCP setup and connection checker",
-  "description": "Generate Brevo MCP client configuration, inspect available tools and validate hosted endpoint access through PipMCP.",
-  "operationIds": [],
+  "title": "Brevo MCP server",
+  "description": "Review the marketing contact list and add a contact record without sending a campaign.",
+  "operationIds": [
+    "brevo_list_contacts",
+    "brevo_create_contact"
+  ],
   "appSlug": "brevo",
   "appName": "Brevo",
   "providerDocs": "https://api.brevo.com/v3/swagger_definition_v3.yml",
@@ -28,12 +30,261 @@
     "requiredCredentialFields": [
       "api_key"
     ],
+    "settings": {
+      "parameter_name": "api-key"
+    },
     "requiredHeaderNames": [],
     "helpUrl": "https://developers.brevo.com/docs/api-key-authentication",
     "tenantRequired": false,
     "accountParameterNames": []
   },
   "attributionSlug": "github-brevo-mcp",
+  "artifactType": "connector",
+  "qualityVersion": 2,
+  "connectorId": "brevo",
+  "connector": {
+    "id": "brevo",
+    "name": "Brevo",
+    "version": "0.1.0",
+    "baseUrl": "https://api.brevo.com/v3",
+    "auth": {
+      "type": "header",
+      "env": "BREVO_API_KEY",
+      "header": "api-key"
+    },
+    "tools": [
+      {
+        "name": "brevo_list_contacts",
+        "description": "brevo list contacts",
+        "method": "GET",
+        "path": "/contacts",
+        "readOnly": true,
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "bindings": {
+          "path": [],
+          "query": {
+            "limit": "limit",
+            "offset": "offset"
+          },
+          "body": {}
+        },
+        "approvalRequired": false,
+        "provenance": [
+          "https://api.brevo.com/v3/swagger_definition_v3.yml"
+        ],
+        "evidence": {
+          "state": "documented",
+          "providerLiveValidation": "not-run"
+        },
+        "sampleArguments": {
+          "limit": 5
+        }
+      },
+      {
+        "name": "brevo_create_contact",
+        "description": "brevo create contact",
+        "method": "POST",
+        "path": "/contacts",
+        "readOnly": false,
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "attributes": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "additionalProperties": false
+        },
+        "bindings": {
+          "path": [],
+          "query": {},
+          "body": {
+            "email": "email",
+            "attributes": "attributes"
+          }
+        },
+        "approvalRequired": true,
+        "body": {
+          "updateEnabled": false
+        },
+        "provenance": [
+          "https://api.brevo.com/v3/swagger_definition_v3.yml"
+        ],
+        "evidence": {
+          "state": "documented",
+          "providerLiveValidation": "not-run"
+        },
+        "sampleArguments": {
+          "email": "sandbox@example.com"
+        }
+      }
+    ],
+    "workflow": {
+      "name": "brevo-workflow",
+      "description": "Review the marketing contact list and add a contact record without sending a campaign.",
+      "steps": [
+        "brevo_list_contacts",
+        "brevo_create_contact"
+      ]
+    },
+    "provenance": [
+      "https://api.brevo.com/v3/swagger_definition_v3.yml"
+    ],
+    "sourceEvidence": {
+      "state": "documented",
+      "providerLiveValidation": "not-run",
+      "checkedAt": "2026-11-08",
+      "operationCount": 2,
+      "kind": "official-openapi",
+      "sha256": "0d7ddf33dae6a1b4b196718f1babf890ff428c83fb15994cd4f55dcd3446bf69"
+    },
+    "setup": {
+      "requiresPipMcpAccount": false,
+      "credentialsHelpUrl": "https://developers.brevo.com/docs/api-key-authentication",
+      "instructions": "In Brevo, open Settings → SMTP & API, go to the API keys tab and click Generate a new API key. Name it and copy the key (shown only once)."
+    },
+    "sampleWarning": "Example IDs are placeholders, not known provider records. Replace them with authorized sandbox/account IDs. Contact emails, file URLs and recipient numbers must be replaced with data you are authorized to use. Examples never authorize a write.",
+    "repoId": "brevo-mcp",
+    "appSlug": "brevo",
+    "product": "pipmcp",
+    "artifactType": "connector",
+    "sourceRevision": "a9d211b64a5e25f3515be094fd7adde62ab56c270ca88611c98e3235ec8ac5b5",
+    "capabilityEvidence": {
+      "local": {
+        "level": "Tested",
+        "operations": [
+          {
+            "name": "brevo_list_contacts",
+            "level": "Tested",
+            "evidenceRefs": [
+              "Provider request/stdio contract tests"
+            ],
+            "method": "contract-fixture"
+          },
+          {
+            "name": "brevo_create_contact",
+            "level": "Tested",
+            "evidenceRefs": [
+              "Provider request/stdio contract tests"
+            ],
+            "method": "contract-fixture"
+          }
+        ],
+        "evidenceRefs": [
+          "Provider request/stdio contract tests"
+        ],
+        "mode": "local"
+      },
+      "managed": {
+        "level": "Documented",
+        "operations": [
+          {
+            "name": "brevo_list_contacts",
+            "level": "Documented",
+            "evidenceRefs": [],
+            "method": "documentation"
+          },
+          {
+            "name": "brevo_create_contact",
+            "level": "Documented",
+            "evidenceRefs": [],
+            "method": "documentation"
+          }
+        ],
+        "evidenceRefs": [],
+        "mode": "managed"
+      }
+    },
+    "authentication": {
+      "type": "api_key_header",
+      "requiredCredentialFields": [
+        "api_key"
+      ],
+      "settings": {
+        "parameter_name": "api-key"
+      },
+      "requiredHeaderNames": [],
+      "helpUrl": "https://developers.brevo.com/docs/api-key-authentication",
+      "tenantRequired": false,
+      "accountParameterNames": []
+    },
+    "managedAvailability": {
+      "status": "listed",
+      "checkedAt": "2026-11-08T12:29:10.433747+00:00"
+    }
+  },
+  "capabilityEvidence": {
+    "local": {
+      "level": "Tested",
+      "operations": [
+        {
+          "name": "brevo_list_contacts",
+          "level": "Tested",
+          "evidenceRefs": [
+            "Provider request/stdio contract tests"
+          ],
+          "method": "contract-fixture"
+        },
+        {
+          "name": "brevo_create_contact",
+          "level": "Tested",
+          "evidenceRefs": [
+            "Provider request/stdio contract tests"
+          ],
+          "method": "contract-fixture"
+        }
+      ],
+      "evidenceRefs": [
+        "Provider request/stdio contract tests"
+      ],
+      "mode": "local"
+    },
+    "managed": {
+      "level": "Documented",
+      "operations": [
+        {
+          "name": "brevo_list_contacts",
+          "level": "Documented",
+          "evidenceRefs": [],
+          "method": "documentation"
+        },
+        {
+          "name": "brevo_create_contact",
+          "level": "Documented",
+          "evidenceRefs": [],
+          "method": "documentation"
+        }
+      ],
+      "evidenceRefs": [],
+      "mode": "managed"
+    }
+  },
+  "utility": {
+    "problem": "Review the marketing contact list and add a contact record without sending a campaign.",
+    "output": "Actual provider API results through local MCP tools"
+  },
   "factory": "leadadapter-pipmcp",
-  "generatorVersion": 1
+  "generatorVersion": 2
 }
