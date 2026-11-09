@@ -1,3 +1,68 @@
+# Prepare a contact record without launching a campaign
+
+**Brevo + your AI assistant · powered by PipMCP**
+
+You want to prepare a contact record without launching a campaign, using the account your team has actually connected.
+
+**Made for:** Marketing coordinators
+
+For real use, you will need PipMCP and access to Brevo.
+
+## Ask your AI to set this up
+
+Paste this into a coding assistant that can open project files and run commands, such as Codex, Claude Code or Grok Build. You do not need to understand the code first.
+
+```text
+Help me use this project: https://github.com/jannikco/brevo-mcp
+
+I'm not a programmer. My goal is: Prepare a contact record without launching a campaign.
+
+Read the project instructions and set it up in a new folder without overwriting my work.
+Guide me through PipMCP and its private key setup; never ask me to paste secrets into this
+chat. Run a documented sample-data demo if available, then help me get a first small
+result from my connected app. Explain the result in plain English. Ask before changing
+records, sending messages or publishing anything.
+```
+
+## Three useful things to ask for
+
+```text
+Review the available marketing contact list.
+```
+
+```text
+Prepare a contact from details I supply. Ask before saving it and do not send a campaign.
+```
+
+```text
+Turn the contacts we reviewed into a clean marketing handoff list for a person to check.
+```
+
+## Your path to a real result
+
+```mermaid
+flowchart LR
+  A["Ask your AI"] --> B["Connect PipMCP"] --> C["Prepare a contact<br/>record without<br/>launching…"] --> D["Review together"]
+```
+
+1. [Open PipMCP setup](https://pipmcp.com/github/start?app=brevo&integration=brevo-mcp&utm_source=github&utm_campaign=github-brevo-mcp&utm_content=people-first-readme) and sign in or create your account.
+2. Connect the app in PipMCP with the permissions you want to grant.
+3. Create the product API key through the official setup, add it privately to your AI project's environment, and ask your AI to try a small read.
+
+**What to expect:** Connect Brevo in your PipMCP account, then use your PipMCP key for the supported actions. Review proposed changes before they are sent. Results depend on the connected account and its permissions; check the returned outcome before relying on it.
+
+Add your PipMCP key privately in your project settings. Keep keys out of chat and public repositories.
+
+## Keep going
+
+- [Find another useful integration](https://github.com/jannikco/pipmcp-connectors)
+- [Connect an API you control](https://github.com/jannikco/openapi-to-mcp)
+- [Try the GitHub project](https://github.com/jannikco/github-mcp)
+
+<details>
+<summary>Technical reference: installation commands, exact capabilities and troubleshooting</summary>
+
+<!-- people-first:technical:start -->
 # Brevo MCP server
 
 **Use Brevo from Claude Code, Codex, Grok Build and MCP clients through PipMCP. One PipMCP API key connects this package to private execution.**
@@ -61,3 +126,7 @@ Transport, package and agent fixtures are tested. Authentication/provider access
 ## Provider setup reference
 
 [Official provider documentation](https://api.brevo.com/v3/swagger_definition_v3.yml). Credentials are entered in PipMCP; this package does not accept or store provider secrets.
+
+<!-- people-first:technical:end -->
+
+</details>
